@@ -8,7 +8,7 @@ python3 main_continual.py \
     --max_epochs 400 \
     --num_tasks 5 \
     --task_idx 0 \
-    --gpus 0,1 \
+    --gpus 0,1,2 \
     --accelerator ddp \
     --sync_batchnorm \
     --num_workers 5 \
@@ -26,8 +26,8 @@ python3 main_continual.py \
     --dali \
     --check_val_every_n_epoch 9999 \
     --name mocov2plus-imagenet100-5T_data \
-    --project ever-learn \
-    --entity unitn-mhug \
+    --project ever-ssl \
+    --entity shulin16 \
     --wandb \
     --save_checkpoint \
     --method mocov2plus \
