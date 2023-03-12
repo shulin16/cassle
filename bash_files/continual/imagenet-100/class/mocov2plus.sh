@@ -2,13 +2,13 @@ python3 main_continual.py \
     --dataset imagenet100 \
     --encoder resnet18 \
     --data_dir $DATA_DIR \
-    --train_dir imagenet-100/train \
-    --val_dir imagenet-100/val \
+    --train_dir /train \
+    --val_dir /val \
     --split_strategy class \
     --max_epochs 400 \
     --num_tasks 5 \
     --task_idx 0 \
-    --gpus 0,1 \
+    --gpus 0,1,2 \
     --accelerator ddp \
     --sync_batchnorm \
     --num_workers 5 \
@@ -26,8 +26,8 @@ python3 main_continual.py \
     --dali \
     --check_val_every_n_epoch 9999 \
     --name mocov2plus-imagenet100-5T \
-    --project ever-learn \
-    --entity unitn-mhug \
+    --project moco_imagenet100_ori \
+    --entity shulin16 \
     --wandb \
     --save_checkpoint \
     --method mocov2plus \
