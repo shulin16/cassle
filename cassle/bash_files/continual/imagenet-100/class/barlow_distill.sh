@@ -2,37 +2,42 @@ python3 main_continual.py \
     --dataset imagenet100 \
     --encoder resnet18 \
     --data_dir $DATA_DIR \
-    --train_dir /media/stubk/shulin/cassle/imagenet100/train \
-    --val_dir /media/stubk/shulin/cassle/imagenet100/val \
+    --train_dir imagenet-100/train \
+    --val_dir imagenet-100/val \
     --split_strategy class \
     --max_epochs 400 \
     --num_tasks 5 \
-    --task_idx 0 \
+    --task_idx 1 \
     --gpus 0,1 \
     --accelerator ddp \
     --sync_batchnorm \
     --num_workers 5 \
     --precision 16 \
     --optimizer sgd \
-    --scheduler cosine \
+    --lars \
+    --grad_clip_lars \
+    --eta_lars 0.02 \
+    --exclude_bias_n_norm \
+    --scheduler warmup_cosine \
     --lr 0.4 \
-    --classifier_lr 0.3 \
     --weight_decay 1e-4 \
     --batch_size 128 \
     --brightness 0.4 \
     --contrast 0.4 \
-    --saturation 0.4 \
+    --saturation 0.2 \
     --hue 0.1 \
+    --gaussian_prob 1.0 0.1 \
+    --solarization_prob 0.0 0.2 \
     --dali \
     --check_val_every_n_epoch 9999 \
-    --name mocov2plus-imagenet100-5T \
-    --project moco_imagenet100_ori \
-    --entity shulin16 \
+    --name barlow-imagenet100-5T-decorrelative \
     --wandb \
     --save_checkpoint \
-    --method mocov2plus \
+    --entity unitn-mhug \
+    --project ever-learn \
+    --scale_loss 0.1 \
+    --method barlow_twins \
     --proj_hidden_dim 2048 \
-    --queue_size 65536 \
-    --temperature 0.2 \
-    --base_tau_momentum 0.99 \
-    --final_tau_momentum 0.999
+    --output_dim 2048 \
+    --distiller decorrelative \
+    --pretrained_model $PRETRAINED_PATH

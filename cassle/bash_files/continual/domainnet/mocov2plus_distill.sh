@@ -1,14 +1,12 @@
 python3 main_continual.py \
-    --dataset imagenet100 \
+    --dataset domainnet \
     --encoder resnet18 \
-    --data_dir $DATA_DIR \
-    --train_dir /media/stubk/shulin/cassle/imagenet100/train \
-    --val_dir /media/stubk/shulin/cassle/imagenet100/val \
-    --split_strategy class \
-    --max_epochs 400 \
-    --num_tasks 5 \
-    --task_idx 0 \
-    --gpus 0,1 \
+    --data_dir $DATA_DIR/domainnet \
+    --split_strategy domain \
+    --max_epochs 200 \
+    --num_tasks 6 \
+    --task_idx 1 \
+    --gpus 0,1,2,3 \
     --accelerator ddp \
     --sync_batchnorm \
     --num_workers 5 \
@@ -18,16 +16,15 @@ python3 main_continual.py \
     --lr 0.4 \
     --classifier_lr 0.3 \
     --weight_decay 1e-4 \
-    --batch_size 128 \
+    --batch_size 64 \
     --brightness 0.4 \
     --contrast 0.4 \
     --saturation 0.4 \
     --hue 0.1 \
     --dali \
-    --check_val_every_n_epoch 9999 \
-    --name mocov2plus-imagenet100-5T \
-    --project moco_imagenet100_ori \
-    --entity shulin16 \
+    --name mocov2plus-domainnet-contrastive \
+    --project ever-learn \
+    --entity unitn-mhug \
     --wandb \
     --save_checkpoint \
     --method mocov2plus \
@@ -35,4 +32,9 @@ python3 main_continual.py \
     --queue_size 65536 \
     --temperature 0.2 \
     --base_tau_momentum 0.99 \
-    --final_tau_momentum 0.999
+    --final_tau_momentum 0.999 \
+    --momentum_classifier \
+    --check_val_every_n_epoch 9999 \
+    --disable_knn_eval \
+    --distiller contrastive \
+    --pretrained_model $PRETRAINED_PATH
